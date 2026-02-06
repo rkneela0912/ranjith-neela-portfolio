@@ -2,6 +2,7 @@ import { ArrowDown, Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
 import { motion, Variants, useScroll, useTransform } from 'framer-motion';
 import profileImage from '@/assets/profile.png';
+import msExpertBadge from '@/assets/badges/ms-expert-badge.svg';
 import { GlowingOrb, MagneticButton } from './AnimatedSection';
 
 const Hero = () => {
@@ -203,15 +204,19 @@ const Hero = () => {
                   <p className="text-xs text-muted-foreground">Years Experience</p>
                 </motion.div>
                 
-                {/* Tech badge */}
+                {/* Microsoft Certified Expert Badge */}
                 <motion.div 
-                  className="absolute -top-2 -left-2 px-4 py-2 bg-accent text-white rounded-full shadow-lg"
-                  initial={{ opacity: 0, scale: 0, x: -20 }}
-                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  className="absolute -top-4 -left-4 w-20 h-20"
+                  initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   transition={{ delay: 1, duration: 0.5, type: "spring" }}
-                  whileHover={{ scale: 1.1, y: -5 }}
+                  whileHover={{ scale: 1.15, rotate: 5 }}
                 >
-                  <p className="text-xs font-semibold">Microsoft Expert</p>
+                  <img 
+                    src={msExpertBadge} 
+                    alt="Microsoft Certified Solutions Expert" 
+                    className="w-full h-full object-contain drop-shadow-lg"
+                  />
                 </motion.div>
               </div>
             </div>
