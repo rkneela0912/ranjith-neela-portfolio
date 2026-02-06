@@ -1,6 +1,6 @@
 import { ArrowDown, Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import headshot from '@/assets/headshot.jpg';
+import profileImage from '@/assets/profile.png';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -169,7 +169,7 @@ const Hero = () => {
                 {/* Image */}
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-2xl">
                   <img
-                    src={headshot}
+                    src={profileImage}
                     alt="Ranjith Neela - Microsoft Solutions Architect"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
