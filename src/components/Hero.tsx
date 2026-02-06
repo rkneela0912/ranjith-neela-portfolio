@@ -1,15 +1,24 @@
 import { ArrowDown, Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, Variants, useScroll, useTransform } from 'framer-motion';
 import profileImage from '@/assets/profile.png';
 import { GlowingOrb, MagneticButton } from './AnimatedSection';
 
 const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  
+  // Parallax scroll effects
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Transform values for parallax layers
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const orbsY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const shapesY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -43,23 +52,43 @@ const Hero = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-secondary/30"
     >
-      {/* Animated background orbs */}
-      <GlowingOrb className="top-1/4 -right-20 w-96 h-96 bg-accent/20" delay={0} />
-      <GlowingOrb className="top-1/3 -right-10 w-64 h-64 bg-accent/30" delay={1} />
-      <GlowingOrb className="-bottom-20 -left-20 w-80 h-80 bg-accent/15" delay={2} />
+      {/* Parallax background layer */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y: bgY }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-secondary/30" />
+      </motion.div>
       
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 tech-grid opacity-50" />
+      {/* Animated background orbs with parallax */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ y: orbsY, opacity }}
+      >
+        <GlowingOrb className="top-1/4 -right-20 w-96 h-96 bg-accent/20" delay={0} />
+        <GlowingOrb className="top-1/3 -right-10 w-64 h-64 bg-accent/30" delay={1} />
+        <GlowingOrb className="-bottom-20 -left-20 w-80 h-80 bg-accent/15" delay={2} />
+      </motion.div>
       
-      {/* Floating geometric shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Subtle grid overlay with parallax */}
+      <motion.div 
+        className="absolute inset-0 tech-grid opacity-50"
+        style={{ y: bgY }}
+      />
+      
+      {/* Floating geometric shapes with parallax */}
+      <motion.div 
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{ y: shapesY }}
+      >
         {/* Floating squares with enhanced animation */}
         <motion.div 
           className="absolute top-20 left-1/4 w-20 h-20 border border-accent/20 rotate-45 rounded-lg"
-          animate={{ 
+          animate={{
             y: [0, -20, 0],
             rotate: [45, 55, 45],
             opacity: [0.2, 0.5, 0.2]
@@ -108,9 +137,12 @@ const Hero = () => {
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
-      </div>
+      </motion.div>
 
-      <div className="section-container relative z-10 pt-20">
+      <motion.div 
+        className="section-container relative z-10 pt-20"
+        style={{ y: contentY, opacity }}
+      >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Profile Image - Now on LEFT */}
           <motion.div 
@@ -323,7 +355,7 @@ const Hero = () => {
             </div>
           </motion.a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
