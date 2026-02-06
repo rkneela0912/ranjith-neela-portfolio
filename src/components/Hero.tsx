@@ -89,16 +89,6 @@ const Hero = () => {
 
           {/* Content - Now on RIGHT */}
           <div className="space-y-8 order-1 lg:order-2">
-            {/* Badge */}
-            <div 
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/30 bg-accent/5 backdrop-blur-sm transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-            >
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-accent text-xs font-medium tracking-wider uppercase">
-                Available for Projects
-              </span>
-            </div>
-
             {/* Name with animated reveal */}
             <div className="space-y-2">
               <h1 
