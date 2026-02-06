@@ -41,7 +41,11 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    // Fallback for HMR transitions - return a safe default
+    return {
+      theme: 'dark' as Theme,
+      toggleTheme: () => {}
+    };
   }
   return context;
 };
