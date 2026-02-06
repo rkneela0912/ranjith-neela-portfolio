@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 const technologies = [
   'Microsoft Azure',
   'Power Platform',
@@ -30,36 +32,32 @@ const TechMarquee = () => {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-secondary/50 to-transparent z-10" />
 
         {/* Scrolling content - duplicated for seamless loop */}
-        <div className="flex animate-marquee">
+        <motion.div 
+          className="flex"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ 
+            duration: 30, 
+            repeat: Infinity, 
+            ease: "linear"
+          }}
+        >
           {[...technologies, ...technologies].map((tech, index) => (
-            <div
+            <motion.div
               key={`${tech}-${index}`}
               className="flex-shrink-0 mx-6 px-6 py-3 bg-card rounded-full border border-border hover:border-accent hover:bg-accent/5 transition-all cursor-default"
+              whileHover={{ 
+                scale: 1.1, 
+                y: -5,
+                transition: { duration: 0.2 }
+              }}
             >
               <span className="text-sm font-medium text-foreground whitespace-nowrap">
                 {tech}
               </span>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-
-      <style>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 };
