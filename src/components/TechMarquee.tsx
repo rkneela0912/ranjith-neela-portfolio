@@ -1,59 +1,273 @@
 import { motion } from 'framer-motion';
 
+// Tech icons with official colors
 const technologies = [
-  'Microsoft Azure',
-  'Power Platform',
-  'Power Apps',
-  'Power Automate',
-  'Power BI',
-  'Dataverse',
-  'SharePoint',
-  'Dynamics 365',
-  'Microsoft Copilot',
-  'Azure OpenAI',
-  'Bot Framework',
-  'Copilot Studio',
-  'Microsoft Teams',
-  'Microsoft Graph',
-  'Azure Functions',
-  'Logic Apps',
-  'TypeScript',
-  'React',
-  'C#',
-  '.NET Core',
+  { 
+    name: 'Microsoft Azure', 
+    color: '#0078D4',
+    icon: (
+      <svg viewBox="0 0 96 96" fill="currentColor" className="w-8 h-8">
+        <path d="M27.53 81.15l18.37-3.22.2-.04L60.5 55.44l.08-.16-14.48-24.9-.07-.13H27.75l-.22.32-12.9 38.51 12.7 11.75.2.18zm27.59-50.24L42.01 58.09l-.06.12 15.18 17.23.14.13 19.64 4.01-.15-.64L55.19 31.1l-.07-.19zM82.18 26.52l-15.7-.04h-.2L53.07 51.23l-.12.22 22.99 36.45.18.29 13.75-2.85-7.55-58.49-.14-.33z"/>
+        <path d="M6.22 67.87L18.66 30.5l.09-.27 15.4-.04h.24l13.6 23.08.1.17-18.64 27.69-.14.21-23.05 4.04-.04-.36v-17.15z" opacity=".8"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Power Platform', 
+    color: '#742774',
+    icon: (
+      <svg viewBox="0 0 96 96" fill="currentColor" className="w-8 h-8">
+        <path d="M48 8C25.9 8 8 25.9 8 48s17.9 40 40 40 40-17.9 40-40S70.1 8 48 8zm0 72c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/>
+        <path d="M48 24c-13.3 0-24 10.7-24 24s10.7 24 24 24 24-10.7 24-24-10.7-24-24-24zm0 40c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16z"/>
+        <circle cx="48" cy="48" r="8"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Power Apps', 
+    color: '#742774',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Power Automate', 
+    color: '#0066FF',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M13 3v6h5l-8 12v-6H5l8-12z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Power BI', 
+    color: '#F2C811',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <rect x="3" y="12" width="4" height="9" rx="1"/>
+        <rect x="10" y="8" width="4" height="13" rx="1"/>
+        <rect x="17" y="3" width="4" height="18" rx="1"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Dataverse', 
+    color: '#0B53CE',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <ellipse cx="12" cy="6" rx="9" ry="3"/>
+        <path d="M3 6v6c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/>
+        <path d="M3 12v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'SharePoint', 
+    color: '#038387',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <circle cx="12" cy="8" r="5"/>
+        <circle cx="7" cy="16" r="4"/>
+        <circle cx="17" cy="16" r="4"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Dynamics 365', 
+    color: '#002050',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4zm0 4l4 2v4c0 3.31-2.28 6.41-4 7.5-1.72-1.09-4-4.19-4-7.5V8l4-2z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Microsoft Copilot', 
+    color: '#6264A7',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Azure OpenAI', 
+    color: '#412991',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.5963 3.8558L13.1038 8.364l2.0201-1.1638a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.4046-.6813zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6099-1.4997Z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Bot Framework', 
+    color: '#0078D4',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Microsoft Teams', 
+    color: '#6264A7',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M19.19 8.77a2.19 2.19 0 1 0 0-4.38 2.19 2.19 0 0 0 0 4.38zM22.31 10h-4.5a1.69 1.69 0 0 0-1.69 1.69v5.62a.56.56 0 0 0 .56.56h5.63a1.69 1.69 0 0 0 1.69-1.69v-4.5a1.69 1.69 0 0 0-1.69-1.68zM14.5 7.5a3 3 0 1 0-6 0 3 3 0 0 0 6 0zM15.75 11H8.25A2.25 2.25 0 0 0 6 13.25v5.5A2.25 2.25 0 0 0 8.25 21h7.5A2.25 2.25 0 0 0 18 18.75v-5.5A2.25 2.25 0 0 0 15.75 11z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Microsoft Graph', 
+    color: '#0078D4',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Azure Functions', 
+    color: '#0062AD',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M13 3v6h5l-8 12v-6H5l8-12z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'Logic Apps', 
+    color: '#0078D4',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'TypeScript', 
+    color: '#3178C6',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201zm-15.113.188h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'React', 
+    color: '#61DAFB',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38-.318-.184-.688-.277-1.092-.278zm-.005 1.09v.006c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44-.96-.236-2.006-.417-3.107-.534-.66-.905-1.345-1.727-2.035-2.447 1.592-1.48 3.087-2.292 4.105-2.295zm-9.77.02c1.012 0 2.514.808 4.11 2.28-.686.72-1.37 1.537-2.02 2.442-1.107.117-2.154.298-3.113.538-.112-.49-.195-.964-.254-1.42-.23-1.868.054-3.32.714-3.707.19-.09.4-.127.563-.132zm4.882 3.05c.455.468.91.992 1.36 1.564-.44-.02-.89-.034-1.345-.034-.46 0-.915.01-1.36.034.44-.572.895-1.096 1.345-1.565zM12 8.1c.74 0 1.477.034 2.202.093.406.582.802 1.203 1.183 1.86.372.64.71 1.29 1.018 1.946-.308.655-.646 1.31-1.013 1.95-.38.66-.773 1.288-1.18 1.87-.728.063-1.466.098-2.21.098-.74 0-1.477-.035-2.202-.093-.406-.582-.802-1.204-1.183-1.86-.372-.64-.71-1.29-1.018-1.946.303-.657.646-1.313 1.013-1.954.38-.66.773-1.286 1.18-1.868.728-.064 1.466-.098 2.21-.098zm-3.635.254c-.24.377-.48.763-.704 1.16-.225.39-.435.782-.635 1.174-.265-.656-.49-1.31-.676-1.947.64-.15 1.315-.283 2.015-.386zm7.26 0c.695.103 1.365.23 2.006.387-.18.632-.405 1.282-.66 1.933-.2-.39-.41-.783-.64-1.174-.225-.392-.465-.774-.705-1.146zm3.063.675c.484.15.944.317 1.375.498 1.732.74 2.852 1.708 2.852 2.476-.005.768-1.125 1.74-2.857 2.475-.42.18-.88.342-1.355.493-.28-.958-.646-1.956-1.1-2.98.45-1.017.81-2.01 1.085-2.964zm-13.395.004c.278.96.645 1.957 1.1 2.98-.45 1.017-.812 2.01-1.086 2.964-.484-.15-.944-.318-1.37-.5-1.732-.737-2.852-1.706-2.852-2.474 0-.768 1.12-1.742 2.852-2.476.42-.18.88-.342 1.356-.494zm11.678 4.28c.265.657.49 1.312.676 1.948-.64.157-1.316.29-2.016.39.24-.375.48-.762.705-1.158.225-.39.435-.788.636-1.18zm-9.945.02c.2.392.41.783.64 1.175.23.39.465.772.705 1.143-.695-.102-1.365-.23-2.006-.386.18-.63.406-1.282.66-1.933zM17.92 16.32c.112.493.2.968.254 1.423.23 1.868-.054 3.32-.714 3.708-.147.09-.338.128-.563.128-1.012 0-2.514-.807-4.11-2.28.686-.72 1.37-1.536 2.02-2.44 1.107-.118 2.154-.3 3.113-.54zm-11.83.01c.96.234 2.006.415 3.107.532.66.905 1.345 1.727 2.035 2.446-1.595 1.483-3.092 2.295-4.11 2.295-.22-.005-.406-.05-.553-.132-.666-.38-.955-1.834-.73-3.703.054-.46.142-.944.25-1.438zm4.56.64c.44.02.89.034 1.345.034.46 0 .915-.01 1.36-.034-.44.572-.895 1.095-1.345 1.565-.455-.47-.91-.993-1.36-1.565z"/>
+      </svg>
+    )
+  },
+  { 
+    name: 'C#', 
+    color: '#239120',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zM9.426 7.12a5.55 5.55 0 0 1 1.985.38v1.181a4.5 4.5 0 0 0-2.25-.566 3.439 3.439 0 0 0-2.625 1.087 4.099 4.099 0 0 0-1.012 2.906 3.9 3.9 0 0 0 .945 2.754 3.217 3.217 0 0 0 2.482 1.023 4.657 4.657 0 0 0 2.464-.634l-.004 1.08a5.543 5.543 0 0 1-2.625.555 4.211 4.211 0 0 1-3.228-1.297 4.793 4.793 0 0 1-1.212-3.409 5.021 5.021 0 0 1 1.365-3.663 4.631 4.631 0 0 1 3.473-1.392c.074-.003.166-.005.242-.005zm5.863 2.47.003.006h1.14l-.637 3.106h2.092l.104-.5h.955l-.104.5h1.1l-.143.697h-1.1l-.253 1.199h1.194l-.143.703h-1.2l-.637 3h-1.1l.634-3h-2.088l-.637 3h-1.1l.637-3H12.86l.14-.703h1.198l.253-1.2h-1.193l.143-.696h1.197zm.863 1.49-.252 1.2h2.093l.253-1.2z"/>
+      </svg>
+    )
+  },
+  { 
+    name: '.NET Core', 
+    color: '#512BD4',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+        <path d="M24 8.77h-2.468v7.565h-1.425V8.77h-2.462V7.53H24zm-6.852 7.565h-4.821V7.53h4.63v1.24h-3.205v2.494h2.953v1.234h-2.953v2.604h3.396zm-6.708 0H8.882L4.78 9.863a2.896 2.896 0 0 1-.258-.51h-.036c.032.189.048.592.048 1.21v5.772H3.157V7.53h1.659l3.965 6.32c.167.261.275.442.323.54h.024c-.04-.233-.06-.629-.06-1.185V7.529h1.372zm-8.703-.693a.868.829 0 0 1-.869.829.868.829 0 0 1-.868-.83.868.829 0 0 1 .868-.828.868.829 0 0 1 .869.829z"/>
+      </svg>
+    )
+  },
 ];
 
 const TechMarquee = () => {
   return (
-    <section className="py-16 bg-secondary/50 overflow-hidden border-y border-border">
+    <section className="py-20 bg-secondary/30 overflow-hidden border-y border-border">
+      <div className="section-container mb-12">
+        <motion.p 
+          className="text-center text-muted-foreground text-sm uppercase tracking-widest"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Expertise & Technologies
+        </motion.p>
+      </div>
+      
       <div className="relative">
-        {/* Gradient overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-secondary/50 to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-secondary/50 to-transparent z-10" />
+        {/* Gradient overlays for fade effect */}
+        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-secondary/30 via-secondary/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-secondary/30 via-secondary/30 to-transparent z-10 pointer-events-none" />
 
-        {/* Scrolling content - duplicated for seamless loop */}
+        {/* First row - scrolling left */}
         <motion.div 
-          className="flex"
+          className="flex mb-8"
           animate={{ x: ['0%', '-50%'] }}
           transition={{ 
-            duration: 30, 
+            duration: 35, 
             repeat: Infinity, 
             ease: "linear"
           }}
         >
           {[...technologies, ...technologies].map((tech, index) => (
             <motion.div
-              key={`${tech}-${index}`}
-              className="flex-shrink-0 mx-6 px-6 py-3 bg-card rounded-full border border-border hover:border-accent hover:bg-accent/5 transition-all cursor-default"
-              whileHover={{ 
-                scale: 1.1, 
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
+              key={`${tech.name}-${index}`}
+              className="flex-shrink-0 mx-4"
+              whileHover={{ scale: 1.1, y: -5 }}
+              transition={{ duration: 0.2 }}
             >
-              <span className="text-sm font-medium text-foreground whitespace-nowrap">
-                {tech}
-              </span>
+              <div className="flex flex-col items-center gap-3 px-6 py-5 bg-card rounded-2xl border border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 group cursor-default min-w-[120px]">
+                <motion.div 
+                  className="transition-colors duration-300"
+                  style={{ color: tech.color }}
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {tech.icon}
+                </motion.div>
+                <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+                  {tech.name}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Second row - scrolling right (reverse direction) */}
+        <motion.div 
+          className="flex"
+          animate={{ x: ['-50%', '0%'] }}
+          transition={{ 
+            duration: 40, 
+            repeat: Infinity, 
+            ease: "linear"
+          }}
+        >
+          {[...technologies.slice().reverse(), ...technologies.slice().reverse()].map((tech, index) => (
+            <motion.div
+              key={`reverse-${tech.name}-${index}`}
+              className="flex-shrink-0 mx-4"
+              whileHover={{ scale: 1.1, y: -5 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="flex flex-col items-center gap-3 px-6 py-5 bg-card rounded-2xl border border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 group cursor-default min-w-[120px]">
+                <motion.div 
+                  className="transition-colors duration-300"
+                  style={{ color: tech.color }}
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {tech.icon}
+                </motion.div>
+                <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors whitespace-nowrap">
+                  {tech.name}
+                </span>
+              </div>
             </motion.div>
           ))}
         </motion.div>
