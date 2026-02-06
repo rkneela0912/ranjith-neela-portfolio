@@ -1,14 +1,17 @@
-import { Award, BadgeCheck } from 'lucide-react';
+import { BadgeCheck } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
 import azureAdminBadge from '@/assets/badges/azure-administrator.png';
 import copilotStudioBadge from '@/assets/badges/copilot-studio-agents.svg';
+import msExpertBadge from '@/assets/badges/ms-expert-badge.svg';
+import msAssociateBadge from '@/assets/badges/ms-associate-badge.svg';
+import msFundamentalsBadge from '@/assets/badges/ms-fundamentals-badge.svg';
 
 interface Certification {
   title: string;
   code: string;
   level: string;
-  badge?: string;
+  badge: string;
 }
 
 const certifications: Certification[] = [
@@ -28,31 +31,37 @@ const certifications: Certification[] = [
     title: 'Microsoft Power Platform Solutions Expert',
     code: 'PL-600',
     level: 'Expert',
+    badge: msExpertBadge,
   },
   {
     title: 'Microsoft Power Apps Developer',
     code: 'PL-400',
     level: 'Associate',
+    badge: msAssociateBadge,
   },
   {
     title: 'Microsoft Certified Solution Developer',
     code: 'MCSD',
     level: 'Professional',
+    badge: msExpertBadge,
   },
   {
     title: 'Microsoft Certified Solution Associate',
     code: 'MCSA',
     level: 'Associate',
+    badge: msAssociateBadge,
   },
   {
     title: 'Microsoft Certified Professional',
     code: 'MCP',
     level: 'Professional',
+    badge: msFundamentalsBadge,
   },
   {
     title: 'Microsoft Specialist',
     code: 'MS',
     level: 'Specialist',
+    badge: msFundamentalsBadge,
   },
 ];
 
@@ -141,27 +150,17 @@ const Certifications = () => {
               }}
             >
               <div className="flex items-start gap-4">
-                {cert.badge ? (
-                  <motion.div 
-                    className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img 
-                      src={cert.badge} 
-                      alt={`${cert.title} badge`} 
-                      className="w-full h-full object-contain"
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.div 
-                    className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent transition-colors"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <Award className="w-6 h-6 text-accent group-hover:text-white transition-colors" />
-                  </motion.div>
-                )}
+                <motion.div 
+                  className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <img 
+                    src={cert.badge} 
+                    alt={`${cert.title} badge`} 
+                    className="w-full h-full object-contain"
+                  />
+                </motion.div>
                 <div className="flex-1">
                   <h3 className="text-base font-semibold text-foreground leading-tight mb-2">
                     {cert.title}
