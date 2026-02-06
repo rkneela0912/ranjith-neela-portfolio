@@ -6,12 +6,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="py-12 border-t border-border relative">
+    <footer className="py-12 border-t border-border bg-background relative">
       <div className="section-container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo & Title */}
           <div className="text-center md:text-left">
-            <a href="#home" className="text-xl font-bold tracking-tight">
+            <a href="#home" className="text-xl font-bold tracking-tight text-foreground">
               Ranjith<span className="text-accent">.</span>Neela
             </a>
             <p className="text-sm text-muted-foreground mt-1">
@@ -25,7 +25,7 @@ const Footer = () => {
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-muted-foreground hover:text-accent transition-colors"
               >
                 {link}
               </a>
@@ -38,26 +38,26 @@ const Footer = () => {
               href="https://github.com/rkneela0912/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-accent transition-colors"
+              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-white transition-all"
               aria-label="GitHub"
             >
-              <Github size={20} />
+              <Github size={18} />
             </a>
             <a
               href="https://www.linkedin.com/in/ranjith-k-n-846992125/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-accent transition-colors"
+              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-white transition-all"
               aria-label="LinkedIn"
             >
-              <Linkedin size={20} />
+              <Linkedin size={18} />
             </a>
             <a
               href="mailto:iamranjithkneela@gmail.com"
-              className="text-muted-foreground hover:text-accent transition-colors"
+              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-white transition-all"
               aria-label="Email"
             >
-              <Mail size={20} />
+              <Mail size={18} />
             </a>
           </div>
         </div>
@@ -70,10 +70,12 @@ const Footer = () => {
           
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors group"
           >
             Back to top
-            <ArrowUp size={16} />
+            <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all">
+              <ArrowUp size={14} />
+            </div>
           </button>
         </div>
       </div>

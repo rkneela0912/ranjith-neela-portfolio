@@ -35,14 +35,14 @@ const certifications = [
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-24 lg:py-32 relative tech-grid">
+    <section id="certifications" className="py-24 lg:py-32 relative bg-background">
       <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
             Professional Credentials
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Certifications & <span className="text-gradient">Credentials</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
@@ -55,19 +55,19 @@ const Certifications = () => {
           {certifications.map((cert, index) => (
             <div
               key={cert.title}
-              className="gradient-border p-6 rounded-xl card-hover group"
+              className="glow-border p-6 rounded-xl bg-card group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                  <Award className="w-6 h-6 text-accent" />
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent transition-colors">
+                  <Award className="w-6 h-6 text-accent group-hover:text-white transition-colors" />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-semibold text-foreground leading-tight mb-2">
                     {cert.title}
                   </h3>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono text-accent bg-accent/10 px-2 py-1 rounded">
+                    <span className="text-xs font-mono text-accent bg-accent/10 px-2 py-1 rounded-md">
                       {cert.code}
                     </span>
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -83,9 +83,9 @@ const Certifications = () => {
 
         {/* Microsoft Partner Badge */}
         <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-secondary/30 rounded-full border border-border">
-            <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-              <BadgeCheck className="w-5 h-5 text-accent" />
+          <div className="inline-flex items-center gap-4 px-8 py-4 bg-card rounded-full border border-border shadow-lg">
+            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+              <BadgeCheck className="w-5 h-5 text-white" />
             </div>
             <div className="text-left">
               <p className="text-sm font-semibold text-foreground">Microsoft Certified Professional</p>

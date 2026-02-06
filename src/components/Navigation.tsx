@@ -26,7 +26,7 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-background/80 backdrop-blur-lg border-b border-border'
+          ? 'bg-background/80 backdrop-blur-lg border-b border-border shadow-sm'
           : 'bg-transparent'
       }`}
     >
@@ -50,7 +50,7 @@ const Navigation = () => {
           {/* CTA Button */}
           <a
             href="#contact"
-            className="hidden md:inline-flex btn-outline text-xs px-6 py-3"
+            className="hidden md:inline-flex btn-primary text-xs px-6 py-3"
           >
             Get In Touch
           </a>
@@ -67,7 +67,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in">
+          <div className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in shadow-lg">
             <div className="flex flex-col py-6 px-6 gap-4">
               {navLinks.map((link) => (
                 <a
