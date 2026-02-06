@@ -1,4 +1,6 @@
 import { Code, Cloud, Database, Bot, Shield, Layers, Terminal, Cpu } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
 
 const skillCategories = [
   {
@@ -43,60 +45,151 @@ const skillCategories = [
   },
 ];
 
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 lg:py-32 relative bg-secondary/30">
+    <section id="skills" className="py-24 lg:py-32 relative bg-secondary/30 overflow-hidden">
+      {/* Animated background elements */}
+      <motion.div 
+        className="absolute -top-40 -right-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.3, 1],
+          x: [0, 30, 0],
+          y: [0, -20, 0]
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute -bottom-40 -left-40 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          x: [0, -20, 0]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
+        <AnimatedSection className="text-center mb-16">
+          <motion.p 
+            className="text-accent text-sm font-semibold tracking-widest uppercase mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             Technical Expertise
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+          </motion.p>
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold tracking-tight text-foreground"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
             Skills & <span className="text-gradient">Technologies</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-muted-foreground mt-4 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
             Comprehensive expertise across the Microsoft ecosystem and modern development technologies
-          </p>
-        </div>
+          </motion.p>
+        </AnimatedSection>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category) => (
-            <div
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          {skillCategories.map((category, index) => (
+            <motion.div
               key={category.title}
-              className="glow-border rounded-xl p-6 bg-card group"
+              variants={staggerItem}
+              className="glow-border rounded-xl p-6 bg-card group cursor-pointer"
+              whileHover={{ 
+                y: -8, 
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
+                <motion.div 
+                  className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-colors"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <category.icon className="w-5 h-5 text-accent group-hover:text-white transition-colors" />
-                </div>
+                </motion.div>
                 <h3 className="text-sm font-semibold text-foreground">
                   {category.title}
                 </h3>
               </div>
               
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.span
                     key={skill}
-                    className="skill-badge text-xs"
+                    className="skill-badge text-xs cursor-pointer"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + skillIndex * 0.05 }}
+                    whileHover={{ 
+                      scale: 1.1, 
+                      y: -3,
+                    }}
                   >
                     {skill}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Core Competencies */}
         <div className="mt-20 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-10 text-foreground">
+          <motion.h3 
+            className="text-2xl font-bold text-center mb-10 text-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             Core <span className="text-gradient">Competencies</span>
-          </h3>
+          </motion.h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               'Solution Architecture',
               'AI Enablement',
@@ -104,15 +197,29 @@ const Skills = () => {
               'Enterprise Integration',
               'Agile Delivery',
               'Technical Leadership',
-            ].map((competency) => (
-              <div
+            ].map((competency, index) => (
+              <motion.div
                 key={competency}
-                className="text-center p-4 bg-card rounded-xl border border-border hover:border-accent hover:shadow-lg transition-all"
+                variants={staggerItem}
+                className="text-center p-4 bg-card rounded-xl border border-border hover:border-accent transition-all cursor-pointer"
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -5,
+                }}
+                whileTap={{ scale: 0.95 }}
               >
-                <p className="text-sm font-medium text-foreground">{competency}</p>
-              </div>
+                <motion.p 
+                  className="text-sm font-medium text-foreground"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + index * 0.05 }}
+                >
+                  {competency}
+                </motion.p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

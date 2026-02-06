@@ -1,4 +1,6 @@
 import { Cpu, Bot, Database, LayoutDashboard, Cloud, Shield, ArrowRight } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import AnimatedSection from './AnimatedSection';
 
 const services = [
   {
@@ -39,35 +41,97 @@ const services = [
   },
 ];
 
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const staggerItem: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
 const Services = () => {
   return (
-    <section id="services" className="py-24 lg:py-32 relative bg-background">
+    <section id="services" className="py-24 lg:py-32 relative bg-background overflow-hidden">
+      {/* Animated background */}
+      <motion.div 
+        className="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+        animate={{ 
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       <div className="section-container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
+        <AnimatedSection className="text-center mb-16">
+          <motion.p 
+            className="text-accent text-sm font-semibold tracking-widest uppercase mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             What I Offer
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+          </motion.p>
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold tracking-tight text-foreground"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
             Services & <span className="text-gradient">Solutions</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-muted-foreground mt-4 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
             Delivering enterprise-grade solutions that drive digital transformation and business value
-          </p>
-        </div>
+          </motion.p>
+        </AnimatedSection>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={service.title}
-              className="group glow-border rounded-2xl p-8 bg-card hover:bg-gradient-to-br hover:from-accent/5 hover:to-transparent transition-all duration-500"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              variants={staggerItem}
+              className="group glow-border rounded-2xl p-8 bg-card hover:bg-gradient-to-br hover:from-accent/5 hover:to-transparent transition-all duration-500 cursor-pointer"
+              whileHover={{ 
+                y: -10, 
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:scale-110 transition-all duration-300">
+              <motion.div 
+                className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent transition-all duration-300"
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.5 }}
+              >
                 <service.icon className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
-              </div>
+              </motion.div>
 
               {/* Content */}
               <h3 className="text-xl font-bold text-foreground mb-3">
@@ -79,24 +143,42 @@ const Services = () => {
 
               {/* Features */}
               <ul className="space-y-2 mb-6">
-                {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                {service.features.map((feature, i) => (
+                  <motion.li 
+                    key={feature} 
+                    className="flex items-center gap-2 text-sm text-muted-foreground"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1 }}
+                  >
+                    <motion.div 
+                      className="w-1.5 h-1.5 rounded-full bg-accent"
+                      animate={{ scale: [1, 1.5, 1] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                    />
                     {feature}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
               {/* Learn More Link */}
-              <a
+              <motion.a
                 href="#contact"
-                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-sm font-medium text-accent"
+                whileHover={{ gap: '12px' }}
               >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
+                Learn More 
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.span>
+              </motion.a>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

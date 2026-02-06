@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { TrendingUp, Users, Briefcase, Award } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 
 const stats = [
   { icon: Briefcase, value: 12, suffix: '+', label: 'Years Experience' },
@@ -36,50 +37,55 @@ const useCountUp = (end: number, duration: number = 2000, start: boolean = false
   return count;
 };
 
-const StatItem = ({ stat, isVisible }: { stat: typeof stats[0], isVisible: boolean }) => {
+const StatItem = ({ stat, isVisible, index }: { stat: typeof stats[0], isVisible: boolean, index: number }) => {
   const count = useCountUp(stat.value, 2000, isVisible);
   
   return (
-    <div className="text-center group">
-      <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:scale-110 transition-all duration-300">
+    <motion.div 
+      className="text-center group"
+      initial={{ opacity: 0, y: 50 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+    >
+      <motion.div 
+        className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent group-hover:scale-110 transition-all duration-300"
+        whileHover={{ rotate: 360 }}
+        transition={{ duration: 0.5 }}
+      >
         <stat.icon className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
-      </div>
-      <p className="text-4xl md:text-5xl font-bold text-foreground mb-2">
+      </motion.div>
+      <motion.p 
+        className="text-4xl md:text-5xl font-bold text-foreground mb-2"
+        initial={{ scale: 0 }}
+        animate={isVisible ? { scale: 1 } : {}}
+        transition={{ delay: 0.3 + index * 0.1, type: "spring", stiffness: 200 }}
+      >
         {count}{stat.suffix}
-      </p>
+      </motion.p>
       <p className="text-muted-foreground">{stat.label}</p>
-    </div>
+    </motion.div>
   );
 };
 
 const StatsCounter = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="py-20 bg-secondary/30 border-y border-border">
-      <div className="section-container">
+    <section ref={sectionRef} className="py-20 bg-secondary/30 border-y border-border relative overflow-hidden">
+      {/* Animated background */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-accent/5"
+        animate={{ 
+          x: ['-100%', '100%']
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
+      
+      <div className="section-container relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
-          {stats.map((stat) => (
-            <StatItem key={stat.label} stat={stat} isVisible={isVisible} />
+          {stats.map((stat, index) => (
+            <StatItem key={stat.label} stat={stat} isVisible={isInView} index={index} />
           ))}
         </div>
       </div>
