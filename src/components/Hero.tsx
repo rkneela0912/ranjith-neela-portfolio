@@ -51,8 +51,44 @@ const Hero = () => {
 
       <div className="section-container relative z-10 pt-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Content */}
-          <div className="space-y-8">
+          {/* Profile Image - Now on LEFT */}
+          <div 
+            className={`relative flex justify-center lg:justify-start order-2 lg:order-1 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+          >
+            <div className="relative">
+              {/* Glow effect behind image */}
+              <div className="absolute inset-0 bg-accent/20 blur-3xl rounded-full scale-90" />
+              
+              {/* Main image container */}
+              <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
+                {/* Decorative ring */}
+                <div className="absolute inset-0 -m-4 rounded-full border-2 border-dashed border-accent/20 animate-[spin_20s_linear_infinite]" />
+                
+                {/* Image */}
+                <div className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-2xl">
+                  <img
+                    src={profileImage}
+                    alt="Ranjith Neela - Microsoft Solutions Architect"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                
+                {/* Stats floating card */}
+                <div className="absolute -bottom-4 -right-4 px-5 py-3 bg-card rounded-xl border border-border shadow-xl">
+                  <p className="text-2xl font-bold text-foreground">12+</p>
+                  <p className="text-xs text-muted-foreground">Years Experience</p>
+                </div>
+                
+                {/* Tech badge */}
+                <div className="absolute -top-2 -left-2 px-4 py-2 bg-accent text-white rounded-full shadow-lg">
+                  <p className="text-xs font-semibold">Microsoft Expert</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content - Now on RIGHT */}
+          <div className="space-y-8 order-1 lg:order-2">
             {/* Badge */}
             <div 
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/30 bg-accent/5 backdrop-blur-sm transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
@@ -149,42 +185,6 @@ const Hero = () => {
                 >
                   <Mail size={20} />
                 </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Profile Image */}
-          <div 
-            className={`relative flex justify-center lg:justify-end transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-          >
-            <div className="relative">
-              {/* Glow effect behind image */}
-              <div className="absolute inset-0 bg-accent/20 blur-3xl rounded-full scale-90" />
-              
-              {/* Main image container */}
-              <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                {/* Decorative ring */}
-                <div className="absolute inset-0 -m-4 rounded-full border-2 border-dashed border-accent/20 animate-[spin_20s_linear_infinite]" />
-                
-                {/* Image */}
-                <div className="w-full h-full rounded-full overflow-hidden border-4 border-background shadow-2xl">
-                  <img
-                    src={profileImage}
-                    alt="Ranjith Neela - Microsoft Solutions Architect"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                
-                {/* Stats floating card */}
-                <div className="absolute -bottom-4 -left-4 px-5 py-3 bg-card rounded-xl border border-border shadow-xl">
-                  <p className="text-2xl font-bold text-foreground">12+</p>
-                  <p className="text-xs text-muted-foreground">Years Experience</p>
-                </div>
-                
-                {/* Tech badge */}
-                <div className="absolute -top-2 -right-2 px-4 py-2 bg-accent text-white rounded-full shadow-lg">
-                  <p className="text-xs font-semibold">Microsoft Expert</p>
-                </div>
               </div>
             </div>
           </div>
