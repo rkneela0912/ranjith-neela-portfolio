@@ -1,8 +1,29 @@
 import { Award, BadgeCheck } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
+import azureAdminBadge from '@/assets/badges/azure-administrator.png';
+import copilotStudioBadge from '@/assets/badges/copilot-studio-agents.svg';
 
-const certifications = [
+interface Certification {
+  title: string;
+  code: string;
+  level: string;
+  badge?: string;
+}
+
+const certifications: Certification[] = [
+  {
+    title: 'Microsoft Azure Administrator',
+    code: 'AZ-104',
+    level: 'Associate',
+    badge: azureAdminBadge,
+  },
+  {
+    title: 'Create Agents in Microsoft Copilot Studio',
+    code: 'Applied Skills',
+    level: 'Applied Skills',
+    badge: copilotStudioBadge,
+  },
   {
     title: 'Microsoft Power Platform Solutions Expert',
     code: 'PL-600',
@@ -120,13 +141,27 @@ const Certifications = () => {
               }}
             >
               <div className="flex items-start gap-4">
-                <motion.div 
-                  className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent transition-colors"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Award className="w-6 h-6 text-accent group-hover:text-white transition-colors" />
-                </motion.div>
+                {cert.badge ? (
+                  <motion.div 
+                    className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <img 
+                      src={cert.badge} 
+                      alt={`${cert.title} badge`} 
+                      className="w-full h-full object-contain"
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div 
+                    className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent transition-colors"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Award className="w-6 h-6 text-accent group-hover:text-white transition-colors" />
+                  </motion.div>
+                )}
                 <div className="flex-1">
                   <h3 className="text-base font-semibold text-foreground leading-tight mb-2">
                     {cert.title}
