@@ -44,22 +44,19 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     const mailtoLink = `mailto:iamranjithkneela@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
     window.location.href = mailtoLink;
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-t from-secondary/20 via-background to-background" />
-      
+    <section id="contact" className="py-24 lg:py-32 relative bg-secondary/30">
       <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
             Let's Connect
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Get In <span className="text-gradient">Touch</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
@@ -70,23 +67,23 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-8">
-            <div className="space-y-6">
+            <div className="space-y-4">
               {contactInfo.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-5 glow-border rounded-xl card-hover group"
+                  className="flex items-center gap-4 p-5 glow-border rounded-xl bg-card group"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                    <item.icon className="w-5 h-5 text-accent" />
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent transition-colors">
+                    <item.icon className="w-5 h-5 text-accent group-hover:text-white transition-colors" />
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <p className="text-sm text-muted-foreground">{item.label}</p>
                     <p className="text-foreground font-medium">{item.value}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-muted-foreground ml-auto group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </a>
               ))}
             </div>
@@ -101,7 +98,7 @@ const Contact = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-accent hover:bg-accent/10 transition-all"
+                    className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-white hover:bg-accent transition-all"
                     aria-label={link.label}
                   >
                     <link.icon className="w-5 h-5" />
@@ -112,8 +109,8 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="gradient-border p-8 rounded-xl">
-            <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
+          <div className="glow-border p-8 rounded-xl bg-card">
+            <h3 className="text-xl font-semibold mb-6 text-foreground">Send a Message</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -126,7 +123,7 @@ const Contact = () => {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
                   placeholder="John Doe"
                 />
               </div>
@@ -141,7 +138,7 @@ const Contact = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
                   placeholder="john@example.com"
                 />
               </div>
@@ -156,7 +153,7 @@ const Contact = () => {
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>

@@ -45,16 +45,14 @@ const skillCategories = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/10 to-background" />
-      
+    <section id="skills" className="py-24 lg:py-32 relative bg-secondary/30">
       <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
             Technical Expertise
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Skills & <span className="text-gradient">Technologies</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
@@ -67,11 +65,11 @@ const Skills = () => {
           {skillCategories.map((category) => (
             <div
               key={category.title}
-              className="glow-border rounded-xl p-6 card-hover group"
+              className="glow-border rounded-xl p-6 bg-card group"
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                  <category.icon className="w-5 h-5 text-accent" />
+                <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-colors">
+                  <category.icon className="w-5 h-5 text-accent group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="text-sm font-semibold text-foreground">
                   {category.title}
@@ -94,8 +92,8 @@ const Skills = () => {
 
         {/* Core Competencies */}
         <div className="mt-20 max-w-4xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-10">
-            Core <span className="text-accent">Competencies</span>
+          <h3 className="text-2xl font-bold text-center mb-10 text-foreground">
+            Core <span className="text-gradient">Competencies</span>
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -109,7 +107,7 @@ const Skills = () => {
             ].map((competency) => (
               <div
                 key={competency}
-                className="text-center p-4 bg-secondary/30 rounded-lg border border-border/50 hover:border-accent/50 transition-colors"
+                className="text-center p-4 bg-card rounded-xl border border-border hover:border-accent hover:shadow-lg transition-all"
               >
                 <p className="text-sm font-medium text-foreground">{competency}</p>
               </div>

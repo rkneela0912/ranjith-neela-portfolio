@@ -9,16 +9,14 @@ const stats = [
 
 const About = () => {
   return (
-    <section id="about" className="py-24 lg:py-32 relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-      
+    <section id="about" className="py-24 lg:py-32 relative bg-secondary/30">
       <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <p className="text-accent text-sm font-medium tracking-widest uppercase mb-4">
+          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4">
             About Me
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
             Professional <span className="text-gradient">Summary</span>
           </h2>
         </div>
@@ -34,10 +32,10 @@ const About = () => {
             
             <p className="text-lg text-muted-foreground leading-relaxed">
               Proven expertise across the complete Microsoft ecosystem including{' '}
-              <span className="text-foreground">Power Platform</span>,{' '}
-              <span className="text-foreground">Azure</span>,{' '}
-              <span className="text-foreground">SharePoint</span>, and{' '}
-              <span className="text-foreground">Dynamics 365</span>. Specializing in AI enablement initiatives 
+              <span className="text-foreground font-medium">Power Platform</span>,{' '}
+              <span className="text-foreground font-medium">Azure</span>,{' '}
+              <span className="text-foreground font-medium">SharePoint</span>, and{' '}
+              <span className="text-foreground font-medium">Dynamics 365</span>. Specializing in AI enablement initiatives 
               including Microsoft Copilot agent development with measurable performance improvements.
             </p>
 
@@ -51,7 +49,7 @@ const About = () => {
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="glow-border rounded-xl p-6 text-center card-hover"
+                  className="glow-border rounded-xl p-6 text-center bg-card"
                 >
                   <stat.icon className="w-6 h-6 mx-auto mb-3 text-accent" />
                   <p className="text-3xl font-bold text-foreground">{stat.value}</p>
@@ -63,16 +61,16 @@ const About = () => {
 
           {/* Education */}
           <div className="space-y-8">
-            <h3 className="text-2xl font-semibold flex items-center gap-3">
+            <h3 className="text-2xl font-semibold flex items-center gap-3 text-foreground">
               <GraduationCap className="text-accent" />
               Education
             </h3>
 
             <div className="space-y-6">
               {/* Masters */}
-              <div className="gradient-border p-6 rounded-xl card-hover">
+              <div className="glow-border p-6 rounded-xl bg-card">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                     <GraduationCap className="w-6 h-6 text-accent" />
                   </div>
                   <div>
@@ -82,15 +80,15 @@ const About = () => {
                     <p className="text-muted-foreground mt-1">
                       Texas A&M University – Kingsville
                     </p>
-                    <p className="text-sm text-accent mt-2">December 2013</p>
+                    <p className="text-sm text-accent font-medium mt-2">December 2013</p>
                   </div>
                 </div>
               </div>
 
               {/* Bachelors */}
-              <div className="gradient-border p-6 rounded-xl card-hover">
+              <div className="glow-border p-6 rounded-xl bg-card">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                     <GraduationCap className="w-6 h-6 text-accent" />
                   </div>
                   <div>
@@ -100,14 +98,14 @@ const About = () => {
                     <p className="text-muted-foreground mt-1">
                       Jawaharlal Nehru Technological University
                     </p>
-                    <p className="text-sm text-accent mt-2">May 2012</p>
+                    <p className="text-sm text-accent font-medium mt-2">May 2012</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Quick facts */}
-            <div className="gradient-border p-6 rounded-xl">
+            <div className="glow-border p-6 rounded-xl bg-card">
               <h4 className="text-sm font-semibold text-accent uppercase tracking-wider mb-4">
                 Core Focus Areas
               </h4>
