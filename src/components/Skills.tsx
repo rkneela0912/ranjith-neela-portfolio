@@ -172,67 +172,77 @@ const Skills = () => {
           ))}
         </motion.div>
 
-        {/* Skills Radar Chart */}
-        <div className="mt-20">
-          <motion.h3 
-            className="text-2xl font-bold text-center mb-10 text-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Skill <span className="text-gradient">Proficiency</span>
-          </motion.h3>
-          <SkillsRadarChart />
-        </div>
+        {/* Skills Radar Chart & Core Competencies Side by Side */}
+        <div className="mt-20 grid lg:grid-cols-2 gap-12 items-start">
+          {/* Skills Radar Chart */}
+          <div>
+            <motion.h3 
+              className="text-2xl font-bold text-center mb-10 text-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Skill <span className="text-gradient">Proficiency</span>
+            </motion.h3>
+            <SkillsRadarChart />
+          </div>
 
-        {/* Core Competencies */}
-        <div className="mt-20 max-w-4xl mx-auto">
-          <motion.h3 
-            className="text-2xl font-bold text-center mb-10 text-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Core <span className="text-gradient">Competencies</span>
-          </motion.h3>
-          
-          <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              'Solution Architecture',
-              'AI Enablement',
-              'Digital Transformation',
-              'Enterprise Integration',
-              'Agile Delivery',
-              'Technical Leadership',
-            ].map((competency, index) => (
-              <motion.div
-                key={competency}
-                variants={staggerItem}
-                className="text-center p-4 bg-card rounded-xl border border-border hover:border-accent transition-all cursor-pointer"
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -5,
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.p 
-                  className="text-sm font-medium text-foreground"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 + index * 0.05 }}
+          {/* Core Competencies */}
+          <div>
+            <motion.h3 
+              className="text-2xl font-bold text-center mb-10 text-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Core <span className="text-gradient">Competencies</span>
+            </motion.h3>
+            
+            <motion.div 
+              className="grid grid-cols-2 gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {[
+                { title: 'Solution Architecture', icon: '🏗️', description: 'Enterprise-scale system design' },
+                { title: 'AI Enablement', icon: '🤖', description: 'Copilot & intelligent automation' },
+                { title: 'Digital Transformation', icon: '🚀', description: 'Modernizing business processes' },
+                { title: 'Enterprise Integration', icon: '🔗', description: 'Seamless system connectivity' },
+                { title: 'Agile Delivery', icon: '⚡', description: 'Fast, iterative development' },
+                { title: 'Technical Leadership', icon: '👥', description: 'Guiding teams to excellence' },
+              ].map((competency, index) => (
+                <motion.div
+                  key={competency.title}
+                  variants={staggerItem}
+                  className="group relative overflow-hidden rounded-xl bg-card border border-border p-5 transition-all duration-300 hover:border-accent hover:shadow-lg"
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -4,
+                  }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {competency}
-                </motion.p>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative z-10">
+                    <motion.span 
+                      className="text-2xl mb-3 block"
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      {competency.icon}
+                    </motion.span>
+                    <h4 className="font-semibold text-foreground text-sm mb-1">
+                      {competency.title}
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      {competency.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
