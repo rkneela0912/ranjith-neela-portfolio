@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Mail, Phone, Globe, Github, Linkedin, Send, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Globe, Github, Linkedin, Send, ArrowRight, Building2, Loader2, CheckCircle } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import AnimatedSection, { AnimatedCard } from './AnimatedSection';
+import { useToast } from '@/hooks/use-toast';
 
 const contactInfo = [
   {
@@ -58,16 +59,58 @@ const staggerItem: Variants = {
 };
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    company: '',
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoLink = `mailto:iamranjithkneela@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.email}`;
-    window.location.href = mailtoLink;
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/iamranjithneela@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || 'Not provided',
+          company: formData.company || 'Not provided',
+          message: formData.message,
+          _subject: `Portfolio Contact from ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        });
+        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or email me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -190,7 +233,8 @@ const Contact = () => {
           <AnimatedCard className="glow-border p-8 rounded-xl bg-card" delay={0.2}>
             <h3 className="text-xl font-semibold mb-6 text-foreground">Send a Message</h3>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Name Field */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -198,41 +242,92 @@ const Contact = () => {
                 transition={{ delay: 0.3 }}
               >
                 <label htmlFor="name" className="block text-sm text-muted-foreground mb-2">
-                  Your Name
+                  Your Name <span className="text-accent">*</span>
                 </label>
                 <motion.input
                   type="text"
                   id="name"
                   required
+                  disabled={isSubmitting}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all disabled:opacity-50"
                   placeholder="John Doe"
                   whileFocus={{ scale: 1.02 }}
                 />
               </motion.div>
-              
+
+              {/* Email Field */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.35 }}
               >
                 <label htmlFor="email" className="block text-sm text-muted-foreground mb-2">
-                  Email Address
+                  Email Address <span className="text-accent">*</span>
                 </label>
                 <motion.input
                   type="email"
                   id="email"
                   required
+                  disabled={isSubmitting}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all disabled:opacity-50"
                   placeholder="john@example.com"
                   whileFocus={{ scale: 1.02 }}
                 />
               </motion.div>
-              
+
+              {/* Phone and Company Fields - Side by Side */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <label htmlFor="phone" className="block text-sm text-muted-foreground mb-2">
+                    <Phone className="w-3 h-3 inline mr-1" />
+                    Phone Number
+                  </label>
+                  <motion.input
+                    type="tel"
+                    id="phone"
+                    disabled={isSubmitting}
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all disabled:opacity-50"
+                    placeholder="+1 (555) 123-4567"
+                    whileFocus={{ scale: 1.02 }}
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.45 }}
+                >
+                  <label htmlFor="company" className="block text-sm text-muted-foreground mb-2">
+                    <Building2 className="w-3 h-3 inline mr-1" />
+                    Company
+                  </label>
+                  <motion.input
+                    type="text"
+                    id="company"
+                    disabled={isSubmitting}
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all disabled:opacity-50"
+                    placeholder="Your Company"
+                    whileFocus={{ scale: 1.02 }}
+                  />
+                </motion.div>
+              </div>
+
+              {/* Message Field */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -240,32 +335,49 @@ const Contact = () => {
                 transition={{ delay: 0.5 }}
               >
                 <label htmlFor="message" className="block text-sm text-muted-foreground mb-2">
-                  Message
+                  Message <span className="text-accent">*</span>
                 </label>
                 <motion.textarea
                   id="message"
                   required
                   rows={4}
+                  disabled={isSubmitting}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all resize-none"
+                  className="w-full px-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all resize-none disabled:opacity-50"
                   placeholder="Tell me about your project..."
                   whileFocus={{ scale: 1.02 }}
                 />
               </motion.div>
               
+              {/* Submit Button */}
               <motion.button 
                 type="submit" 
-                className="btn-primary w-full gap-2"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={isSubmitting || isSubmitted}
+                className="btn-primary w-full gap-2 disabled:opacity-70"
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.6 }}
               >
-                <Send className="w-4 h-4" />
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : isSubmitted ? (
+                  <>
+                    <CheckCircle className="w-4 h-4" />
+                    Message Sent!
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </>
+                )}
               </motion.button>
             </form>
           </AnimatedCard>
