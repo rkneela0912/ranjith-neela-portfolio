@@ -1,7 +1,7 @@
 import { Code, Cloud, Database, Bot, Shield, Layers, Terminal, Cpu } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-
+import SkillsRadarChart from './SkillsRadarChart';
 const skillCategories = [
   {
     icon: Code,
@@ -171,6 +171,19 @@ const Skills = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Skills Radar Chart */}
+        <div className="mt-20">
+          <motion.h3 
+            className="text-2xl font-bold text-center mb-10 text-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Skill <span className="text-gradient">Proficiency</span>
+          </motion.h3>
+          <SkillsRadarChart />
+        </div>
 
         {/* Core Competencies */}
         <div className="mt-20 max-w-4xl mx-auto">
