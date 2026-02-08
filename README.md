@@ -1,6 +1,6 @@
 # Ranjith Neela - Portfolio
 
-A personal portfolio website showcasing my skills, experience, and projects.
+A personal portfolio website showcasing my skills, experience, and projects. connect with me at connect@ranjithneela.com
 
 ## Technologies Used
 
