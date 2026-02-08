@@ -27,6 +27,7 @@ const Navigation = () => {
     theme,
     toggleTheme
   } = useTheme();
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -34,6 +35,19 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    setIsMobileMenuOpen(false);
+  };
   return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/80 backdrop-blur-lg border-b border-border shadow-sm' : 'bg-transparent'}`}>
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
@@ -45,9 +59,16 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map(link => <a key={link.href} href={link.href} className="nav-link text-sm font-medium">
+            {navLinks.map(link => (
+              <a 
+                key={link.href} 
+                href={link.href} 
+                onClick={(e) => handleSmoothScroll(e, link.href)}
+                className="nav-link text-sm font-medium"
+              >
                 {link.label}
-              </a>)}
+              </a>
+            ))}
           </div>
 
           {/* Right side: Theme toggle + CTA */}
@@ -75,16 +96,29 @@ const Navigation = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && <div className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in shadow-lg">
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in shadow-lg">
             <div className="flex flex-col py-6 px-6 gap-4">
-              {navLinks.map(link => <a key={link.href} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors py-2 text-lg" onClick={() => setIsMobileMenuOpen(false)}>
+              {navLinks.map(link => (
+                <a 
+                  key={link.href} 
+                  href={link.href} 
+                  className="text-muted-foreground hover:text-foreground transition-colors py-2 text-lg" 
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                >
                   {link.label}
-                </a>)}
-              <a href="#contact" className="btn-primary text-center mt-4" onClick={() => setIsMobileMenuOpen(false)}>
+                </a>
+              ))}
+              <a 
+                href="#contact" 
+                className="btn-primary text-center mt-4" 
+                onClick={(e) => handleSmoothScroll(e, '#contact')}
+              >
                 Get In Touch
               </a>
             </div>
-          </div>}
+          </div>
+        )}
       </div>
     </nav>;
 };
