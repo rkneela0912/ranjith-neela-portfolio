@@ -1,7 +1,7 @@
 import { Code, Cloud, Database, Bot, Shield, Layers, Terminal, Cpu } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import AnimatedSection from './AnimatedSection';
-import SkillsRadarChart from './SkillsRadarChart';
+import SkillsProgressBars from './SkillsProgressBars';
 const skillCategories = [
   {
     icon: Code,
@@ -184,7 +184,7 @@ const Skills = () => {
             >
               Skill <span className="text-gradient">Proficiency</span>
             </motion.h3>
-            <SkillsRadarChart />
+            <SkillsProgressBars />
           </div>
 
           {/* Core Competencies */}
