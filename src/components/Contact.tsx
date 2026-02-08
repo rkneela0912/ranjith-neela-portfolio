@@ -3,7 +3,12 @@ import { Mail, Phone, Globe, Github, Linkedin, Send, ArrowRight, Building2, Load
 import { motion, Variants } from 'framer-motion';
 import AnimatedSection, { AnimatedCard } from './AnimatedSection';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
 
+// EmailJS Configuration
+const EMAILJS_SERVICE_ID = 'service_p5j889l';
+const EMAILJS_TEMPLATE_ID = 'template_ksjocih';
+const EMAILJS_PUBLIC_KEY = 'bIoI38NwVp8nA34DJ';
 const contactInfo = [
   {
     icon: Mail,
@@ -75,34 +80,30 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/iamranjithneela@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || 'Not provided',
-          company: formData.company || 'Not provided',
-          message: formData.message,
-          _subject: `Portfolio Contact from ${formData.name}${formData.company ? ` - ${formData.company}` : ''}`,
-        }),
-      });
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone || 'Not provided',
+        company: formData.company || 'Not provided',
+        message: formData.message,
+      };
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
-        });
-        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
-        setTimeout(() => setIsSubmitted(false), 5000);
-      } else {
-        throw new Error('Failed to send message');
-      }
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setIsSubmitted(true);
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
+      console.error('EmailJS error:', error);
       toast({
         title: "Failed to send message",
         description: "Please try again or email me directly.",
