@@ -6,7 +6,7 @@ const stats = [
   { icon: Briefcase, value: 12, suffix: '+', label: 'Years Experience' },
   { icon: Users, value: 50, suffix: '+', label: 'Enterprise Clients' },
   { icon: TrendingUp, value: 100, suffix: '+', label: 'Projects Delivered' },
-  { icon: Award, value: 6, suffix: '', label: 'Certifications' },
+  { icon: Award, value: 6, suffix: '+', label: 'Certifications' },
 ];
 
 const useCountUp = (end: number, duration: number = 2000, start: boolean = false) => {
