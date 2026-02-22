@@ -6,7 +6,7 @@ const stats = [
   { icon: Briefcase, value: '12+', label: 'Years Experience' },
   { icon: Code2, value: '30+', label: 'Canvas Apps' },
   { icon: Award, value: '50+', label: 'Workflows' },
-  { icon: GraduationCap, value: '6', label: 'Certifications' },
+  { icon: GraduationCap, value: '6+', label: 'Certifications' },
 ];
 
 const staggerContainer: Variants = {
